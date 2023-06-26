@@ -1,6 +1,6 @@
 ---
 title: "Protein Visualisation Workshop"
-subtitle: "Protein visualisation workshop for CCeMP, July 2023."
+subtitle: "Protein visualisation workshop for CCeMMP, July 2023."
 ---
 
 ### Before the Workshop
