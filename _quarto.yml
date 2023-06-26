@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+filters:
+   - lightbox
+lightbox: auto
+website:
+  title: "Protein Visualisation Workshop"
+  sidebar:
+    style: floating
+    tools:
+      - icon: twitter
+        href: https://twitter.com/bradyajohnston
+      - icon: github
+        href: https://github.com/BradyAJohnston/2023-02-02-blender-workshop/
+    search: true
+    contents:
+      - section: "Information"
+        contents:
+        - href: index.qmd
+          text: About
+        - installation.qmd
+        - online-tutorials.qmd
+        - quick-reference.qmd
+      - section: "Workshop"
+        contents:
+        - introduction.qmd
+        - molecular-nodes.qmd
+        - exporting-importing.qmd
+        
+        
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+
+
+
+

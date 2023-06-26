@@ -1,0 +1,17 @@
+---
+title: "Online Tutorials"
+---
+
+If you want to get a head start before the workshop, you can watch some of the online tutorials which I have already published on youtube. I cover a general introduction to Blender, Geometry Nodes and Molecular Nodes. These tutorials are aimed at other biochemists who are familiar with protein structures, but not with 3D modelling or 3D programs such as Blender.
+
+## Blender for Biochemists
+
+Below are the videos on a general introduction to Blender for Biochemists and others alike, focusing on how to export proteins from PyMol and ChimeraX and import it into Blender.
+
+{{< video https://youtu.be/CfkjBoOaw0g >}}
+
+## Molecular Nodes
+
+Tutorials focusing on how to use the current iteration of Molecular Nodes, from importing from the PDB and doing some basics of styling and rendering the proteins.
+
+{{< video https://youtu.be/CvmFaRVmZRU >}}

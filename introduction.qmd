@@ -1,0 +1,87 @@
+---
+title: 1. Introduction to Blender
+---
+
+Blender is a complicated program and it is easy to get overwhelmed. We are going to look at it bit by bit, and ultimately only use a fraction of what Blender is capable of.
+
+## Workspaces
+
+Blender has a lot of workspaces. It's a tool that can be used for a nearly unlimited number of tasks. People use it for 2D animated movies, 3D animated movies and TV shows, motion graphics & VFX, creating assets for blockbuster videogames and even for making cool renderings of proteins.
+
+Because Blender can be used for so many different purposes, there is a lot of functionality that can be completely overwhelming when you are first starting out. Thankfully for the work that we are wanting to do, we will only need a small subset of what Blender can offer, and so we can limit ourselves to a couple of workspaces.
+
+### The 3D Viewport
+
+![The starting 3D viewport, which you are greeted with when you start Blender.](images/paste-820DB89C.png){fig-alt="A screenshot of Blender, showing the default starting scene, demonstrating the 3D viewport with a single object in the centre, the default cube." fig-align="center"}
+
+This 3D viewport will seem familiar if you have used other programs such as PyMol, ChimeraX & VMD. You can move the camera around just like in those other programs.
+
+You can rotate the camera view either using the middle mouse button <kbd>MMB</kbd>, or using your touch pad if you are on a laptop. You can also click and drag the axis widget to rotate the camera.
+
+You can pan the camera using <kbd>Shift</kbd> + <kbd>MMB</kbd>
+
+The main difference is that you can also manipulate the 3D scene in front of you. You can select objects with a left click of the mouse, and move them around by *Grabbing* them with the <kbd>G</kbd> key.
+
+The main actions that you use the 3D Viewport for are: \
+
+-   <kbd>G</kbd> - **Grabbing:** Moving an object around in 3D space.
+
+-   <kbd>S</kbd> - **Scaling:** Changing the relative size of an object.
+
+-   <kbd>R</kbd> - **Rotating:** Rotating the object in 3D space.
+
+#### The Grid and Axes
+
+In the 3D viewport, much like in real life, there are 3 axes of possible movement and direction. Inside of Blender they are `X` `Y` and `Z`. `X` and `Y` form the flat grid that you see in the viewport, being coloured TODO red and green respectively, while `Z` is the blue vertical axis. These are labelled and highlighted on the axis widget, which is present in the top right corner of the viewport. This will rotate as you rotate the view, so it can always be used as a reference point.
+
+![The axis widget, present in the 3D viewport.](images/paste-E98C8D82.png){fig-align="center"}
+
+When applying any of the transformations, you can limit them to a single axis. For example you can move the cube just along the X axis, by press <kbd>G</kbd> then <kbd>x</kbd> which will move the cube just along the `x` axis. The same can be applied to any of the transformations of translating, scaling and rotation to any of the axes. You can transfrorm _perpendicular_ to a particular axis by useing  <kbd>G</kbd> then <kbd>Shift</kbd> + <kbd>x</kbd>
+
+![Example transformations.](images/example_transformations.mp4)
+
+## Adding New Objects
+
+Add new objects in the 3D scene by clicking <kbd>Shift</kbd> + <kbd>A</kbd>, or using the `Add` menu towards the top of the 3D viewport. You can then select and transform these objects.
+
+![Adding new objects to the 3D scene.](images/blender-add_objects.mp4)
+
+## Editing a Mesh
+
+You can switch to `Edit Mode` with your mouse in the 3D viewport by clicking <kbd>Tab</kbd> or by chaning it in the top left corner. While in edit mode, you can see all of the vertices and edges of an object, and you can physically edit these parts of the mesh to create a new 3D mesh.
+
+![Example of editing meshes in edit mode.](images/blender_edit_mode.mp4)
+
+## Rendering an Image
+
+
+Blender doesn't render whatever you are currently seeing. Blender will render using the dedicated `Camera` object that is present inside of the 3D scene.
+
+### What the Camera Sees
+
+You can move this camera around by clicking on it and applying transformations like any other object. To preview what the camera is viewing. you can click on the cmaera widget icon on the top right of the 3D viewport. 
+
+To render an image you can use the `Render` tab on the top right, or click <kbd>F12</kbd> as the keyboard shortcut. Only once you click render, will Blender properly calculate all of the requried lighting of the scene and produce a rendered image. You can then save this image as a `.png` or other image format.
+
+![Rendering an image.](images/blender_camera_render.mp4)
+
+### Moving the Camera
+
+Moving and rotating the camera as an object can often be a difficult process. To move the camera around in `First Person Mode` which most people will be familiar with from playing video games use <kbd>Shift</kbd> + <kbd>`</kbd> (below the escape key on US keyboards) and this will control the camera like a first-person video game. Use  <kbd>W</kbd> / <kbd>S</kbd> / <kbd>A</kbd> / <kbd>D</kbd> to move forward, backward, left and right. <kbd>Q</kbd> / <kbd>E</kbd> move up and down. <kbd>Shift</kbd> increase the movement speed. Moving the mouse cursor changes the direction of the camera. Using the scroll-wheel up and down increases or decreases the movement speed of the camera.
+
+![Moving the camera around in first person.](images/blender_camera_movement.mp4)
+### Geometry Nodes Editor
+
+This is where we edit the node graph for Molecular Nodes. The node graph is a program you create, that is read and executed by Blender from left to right. Each node performs an action on the geometry that is passed into it, and the result of that action is passed out to the right.
+
+> Think of it as creating a set of rules for the computer to follow. You define the rules, and the computer can follow those same rules, even if you start with a different data set.
+
+Combining multiple different nodes you can create protein models and complex 3D scenes.
+
+![](images/gn-node-graph.png)
+
+### Shader Editor
+
+This is where you can change the colour of something. Coming from a program like PyMol and ChimeraX, you might be used to the idea of just changing the colour of something. "I want my protein to be red.", and then just making that change with a colour picker.
+
+When dealing with 3D scenes, it's not quite as simple as that anymore. Blender is a 3D rendering program, which means it takes into account not just the colour or something, but other physical properties of an object when calculating how it *looks*. You can change how *metallic* a surface is, along with how rough it is and a lot of other complex components in 3D graphics. Try not to worry too much about what you are playing around with, just move the sliders one way and the other to try and find a look that you like. You will however be able to change the colour of something by changing the primary RGB selector.

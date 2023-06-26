@@ -1,0 +1,39 @@
+---
+title: "Protein Visualisation Workshop"
+subtitle: "Protein visualisation workshop for Purdue University, June 2023."
+---
+
+### Before the Workshop
+
+Ensure you have downloaded and installed the latest Blender ([currently 3.5.1](https://www.blender.org/download/)), as well as downloaded and installed the latest [Molecular Nodes](https://github.com/BradyAJohnston/MolecularNodes/releases). Instructions can be followed on the [Installation page](installation.qmd). If you are on an M1 or M2 Mac, the installation instructions are slightly more complex. We will not be going over using MDAnysis to import molecular dynamics in this workshop, so if it can't be installed then it is not a huge issue.
+
+### What to Bring
+
+If you have access to more than one laptop, the most powerful laptop you can get your hands on. Blender is well optimised to run even on older and less powerful computers, but the more powerful the computer, the easier your journey will be.
+
+-   Laptop
+    -   the more powerful the better (specifically GPU)
+-   Power cable
+    -   you **WILL** run out of battery otherwise
+-   External 3-button mouse
+    -   not a *requirement*, but will make working in Blender easier
+
+### Workshop Outline
+
+1.  Introduction to Blender
+
+-   Blender workspaces
+-   Creating a basic 3D scene
+-   Using materials
+-   Rendering a basic image
+
+2.  Downloading Structures from the PDB
+
+-   Using Molecular Nodes to Download Structures
+-   Change Styles
+-   Use basic selection math to combine styles
+
+3.  Rendering a Nice Molecule
+
+-   Set up lighting, camera and materials
+-   Rendering different resolutions and speeding up your rendering
