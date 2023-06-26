@@ -1,0 +1,212 @@
+[
+  {
+    "objectID": "exporting-importing.html",
+    "href": "exporting-importing.html",
+    "title": "2. PyMol and ChimeraX",
+    "section": "",
+    "text": "There are several ways to import protein structures into Blender and other 3D programs for animation and rendering, they all have their advantages and disadvantages. In this section we will cover how to export a 3D model from PyMol or ChimeraX (the principle remains the same for other Molecular Graphics Software) and to then import it into Blender."
+  },
+  {
+    "objectID": "exporting-importing.html#exporting-the-model",
+    "href": "exporting-importing.html#exporting-the-model",
+    "title": "2. PyMol and ChimeraX",
+    "section": "Exporting the Model",
+    "text": "Exporting the Model\n\nPyMol\nfetch 4ozs\n\n\n\n\n\nIf we run the following command inside of PyMol, we get some information on the save command and the formats that we can save in:\nhelp save\nDESCRIPTION\n \n    \"save\" writes content to a file.\n \nUSAGE\n \n    save filename [, selection [, state [, format ]]]\n \nARGUMENTS\n \n    filename = string: file path to be written\n \n    selection = string: atoms to save {default: (all)}\n \n    state = integer: state to save {default: -1 (current state)}\n \nPYMOL API\n \n    cmd.save(string file, string selection, int state, string format)\n \nNOTES\n \n    The file format is automatically chosen if the extesion is one of\n    the supported output formats: pdb, pqr, mol, sdf, pkl, pkla, mmd, out,\n    dat, mmod, cif, pov, png, pse, psw, aln, fasta, obj, mtl, wrl, dae, idtf,\n    or mol2.\n \n    If the file format is not recognized, then a PDB file is written\n    by default.\n \n    For molecular files and where applicable and supported:\n \n    * if state = -1 (default), then only the current state is written.\n \n    * if state = 0, then a multi-state output file is written.\n \nSEE ALSO\n \n    load, get_model\n \nInside of the nodes, we see the supported output formats are: pdb, pqr, mol, sdf, pkl, pkla, mmd, out, dat, mmod, cif, pov, png, pse, psw, aln, fasta, obj, mtl, wrl, dae, idtf, or mol2.\nSome of these are relevant to the work that you are likely already familiar with such as the .mol and the .pdb, but a lot of them may seem strange. .obj, .dae, .wrl are all generic 3D model formats that are not specific to proteins at all. You can save your 3D model you have displayed inside of your viewport with the following command:\nsave protein.wrl\nDifferent 3D model formats have pros and cons. I have found .wrl to be the best when exporting from PyMol.\n\n\n\n\n\n\n\n\n\n\nPyMol will export the 3D model relative to where the camera currently is. That means if you export one half a dimer, move the camera, then export the other half of the dimer, they will not line up when importing to Blender.\n\n\nYou should now have a 3D model save in your working directory, which is ready to be imported into Blender."
+  },
+  {
+    "objectID": "molecular-nodes.html",
+    "href": "molecular-nodes.html",
+    "title": "3. Molecular Nodes",
+    "section": "",
+    "text": "This is a very basic introduction to Molecular Nodes. How to import a protein from the PDB & change the colour and style via editing the node graph. Molecular Nodes and Geometry Nodes in general has a lot more advanced functionality, and I encourage you to watch other YouTube tutorials and spend time playing around with it to see what is possible. Everything that I have achieved so far is through playing around to see what could be done."
+  },
+  {
+    "objectID": "molecular-nodes.html#youtube-tutorials",
+    "href": "molecular-nodes.html#youtube-tutorials",
+    "title": "3. Molecular Nodes",
+    "section": "YouTube Tutorials",
+    "text": "YouTube Tutorials\nI have also made a series of YouTube tutorials walking through some of the functionality of Molecular Nodes. Currently this tutorial series is for the older version of Molecular Nodes and not the 2.0 version. The basic functionality and idea remain the same, but I will be updating this series once I get enough time."
+  },
+  {
+    "objectID": "molecular-nodes.html#the-molecularnodes-panel",
+    "href": "molecular-nodes.html#the-molecularnodes-panel",
+    "title": "3. Molecular Nodes",
+    "section": "The MolecularNodes Panel",
+    "text": "The MolecularNodes Panel\n\nClick on the Scene Properties panel, which will show the MolecularNodes panel, which has the buttons and options for downloading and importing protein structures.\nEnter your PDB ID of choice and click on download. This will import the molecular data into Blender, and you will see a new object appear in the Outliner (top right) under the MolecularNodes collection.\n\n\n\n\n\n\nThe structure is now imported into the scene. While initially the structure will appear as grey points, this is because Blender has a 3D view for working, then a Rendered view for actually rendering with calculated lighting."
+  },
+  {
+    "objectID": "molecular-nodes.html#rendered-view",
+    "href": "molecular-nodes.html#rendered-view",
+    "title": "3. Molecular Nodes",
+    "section": "Rendered View",
+    "text": "Rendered View\n\nClick the ‘Render Properties’ tab, which has the icon for the back of a camera.\nChange the render engine from Eevee to Cycles.\nChange the render device from CPU to GPU if applicable. Some computers may not have GPU compute available.\nChange the view to rendered view, which will calculate the lighting for the scene and show all of the atoms."
+  },
+  {
+    "objectID": "molecular-nodes.html#geometry-nodes-editor",
+    "href": "molecular-nodes.html#geometry-nodes-editor",
+    "title": "3. Molecular Nodes",
+    "section": "Geometry Nodes Editor",
+    "text": "Geometry Nodes Editor\nThis is where we edit the node graph for Molecular Nodes. The node graph is a geometry processing program you create, that is read and executed by Blender from left to right. Each node performs an action on the geometry that is passed into it, and the result of that action is passed out to the right. Think of it as creating a set of rules for the computer to follow. You define the rules, and the computer can follow those same rules, even if you start with a different data set.\nThe data flows like a river, along the green noodles of the node graph. There must be only 1 final output. If you are using the molecular data, then there must also be a single input.\n\n\n\nExample node tree, demonstrating the flow of information through the nodes.\n\n\n\n\n\n\nflowchart LR\n  A{Atomic\\nData} --&gt; B[Manipulation]\n  B --&gt; D(Style)\n  D --&gt; G{Geometry\\nOutput}\n\n\n\n\n\n\n\n\n\nScreenshot of the Geometry Nodes workspace.\n\n\nThe starting style MOL_style_atoms_cycles is only visible via inside of the Cycles render engine. You can add other styles manipulate the data through other nodes, by adding them with Shift + A and navigating to the MolecularNodes panel at the bottom. There are several categories of nodes for different animations and styles. You can add the Ribbon Protein node, which will create a ribbon representation based on the alpha carbons in the structure. If there is not colour in the structure, ensure that the node has a material MOL_atomic_material at the bottom of the node.\n\n\n\n\n\nThe data flows through the node graph from left to right. There should always be one input, which is the atomic data that is stored in the 3D mesh of the atoms and bonds. There should also be only one output, which is the final geometry that has been created throughout the node graph.\n\n\n\n\nflowchart LR\n  A{Atomic\\nData} --&gt; B[Manipulation]\n\n  B --&gt; D(Style 1)\n  B --&gt; E(Style 2)\n  B --&gt; S(Style 3)\n\n  sS[Selection] --&gt; S\n\n  E --&gt; F[Join\\nGeometry]\n  D --&gt; F\n  S --&gt; F\n\n  F --&gt; G{Geometry\\nOutput}\n\n\n\n\n\nAs demonstrated in the diagram, the flow of the data can split across multiple different branches of the tree, with the result of each parallel computation being combined before being exported.\nEach of these different branches can be a different style, in this example shown two different styles are applied, and the third style has a custom selection. All of the styles are the result of the same data manipulation.\nThe node graph in between can be as complex as you want to make it, as long as there is a continuous connection to the output of the geometry, it should produce a result.\n\n\n\nAn example of a more complex node graph, with multiple branches that diverge and come back together.\n\n\nCombining multiple different nodes you can create protein models and complex 3D scenes. In the example below, there is a node tree which should be present on every new structure imported via MolecularNodes. The atoms and bonds are passed in from the left, the atoms are given a colour based on their element and their chain_id, and then the atoms are styled as atoms, scaling the atom radii to 1.00.\nThe data flows through the node tree from left to right, along the bright green lines. The atomic data comes in, goes through layers of manipulation, a style is applied, and the created geometry is then outputted from the node tree."
+  },
+  {
+    "objectID": "molecular-nodes.html#quick-animations",
+    "href": "molecular-nodes.html#quick-animations",
+    "title": "3. Molecular Nodes",
+    "section": "Quick Animations",
+    "text": "Quick Animations\nThere are many ways to quickly create animations inside of Blender and MolecularNodes. One such way is to use the Wiggle node inside of MolecularNodes. This wiggles the amino acid side chains, based on their experimentally-determined B-factor, to give life to the structure. Crystral structures are ultimately static snapshots of a dynamic system, and this is a quick way to bring some of those dynamics back to the structure.\nIn the example below, the following steps are followed:\n\nImport a structure from the PDB with it’s corresponding ID\nAdd the Wiggle node Molecular Nodes -&gt; Animation -&gt; Res Wiggle in before the final style node is applied. As you change the Animate 0..1 value the AA side chains will animate.\nAdd the Animate Value node Molecular Nodes -&gt; Animation -&gt; Animate Value and connect the output to the Animate 0..1 input of the Wiggle node.\n\nYou can start and stop playback of animations in Blender with the Space key.\nThe resulting node tree will wiggle the AA based on the parameters as the value goes from 0 to 1. The animation will perfectly loop from values 0 to 1. Try changing the amplitude of the wiggle, or the frame range for the animate value node to see how it changes the final animation.\n\n\n\nQuickly adding life to a crystal structure.\n\n\n\n\n\nThe nodes used in the wiggle animation above."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Protein Visualisation Workshop",
+    "section": "",
+    "text": "Before the Workshop\nEnsure you have downloaded and installed the latest Blender (currently 3.6.0), as well as downloaded and installed the latest Molecular Nodes. Instructions can be followed on the Installation page. If you are on an M1 or M2 Mac, the installation instructions are slightly more complex. We will not be going over using MDAnysis to import molecular dynamics in this workshop, so if it can’t be installed then it is not a huge issue.\n\n\nWhat to Bring\nIf you have access to more than one laptop, the most powerful laptop you can get your hands on. Blender is well optimised to run even on older and less powerful computers, but the more powerful the computer, the easier your journey will be.\n\nLaptop\n\nthe more powerful the better (specifically GPU)\n\nPower cable\n\nyou WILL run out of battery otherwise\n\nExternal 3-button mouse\n\nnot a requirement, but will make working in Blender easier\n\n\n\n\nWorkshop Outline\n\nDay 1: Importing and Rendering\n\nIntroduction to Blender\n\n\nBlender workspaces\nCreating a basic 3D scene\nUsing materials\nRendering a basic image\n\n\nDownloading Structures from the PDB\n\n\nUsing Molecular Nodes to Download Structures\nChange Styles\nUse basic selection math to combine styles\n\n\nRendering a Nice Molecule\n\n\nSet up lighting, camera and materials\nRendering different resolutions and speeding up your rendering\n\n\n\nDay 2: Animating and Adding Complexity\n\nHand-animating and keyframes.\nAdditional complexity in node trees."
+  },
+  {
+    "objectID": "quick-reference.html",
+    "href": "quick-reference.html",
+    "title": "How do I…",
+    "section": "",
+    "text": "A quick reference document on how to do common operations inside of Molecular Nodes."
+  },
+  {
+    "objectID": "quick-reference.html#i-cant-see-the-atoms",
+    "href": "quick-reference.html#i-cant-see-the-atoms",
+    "title": "How do I…",
+    "section": "I can’t see the atoms",
+    "text": "I can’t see the atoms\nIn rendered view the atoms don’t show up!\n\n\n\n\n\nThe default starting style is MOL_style_atoms_cycles. This is chosen because it is the safest option when importing larger structures to not crash your computer. It is not however only visible in the Cycles render engine and not Eevee. You can change the style you are applying to the molecule, or change the render engine to fix it."
+  },
+  {
+    "objectID": "quick-reference.html#changing-the-colors-but-its-still-grey",
+    "href": "quick-reference.html#changing-the-colors-but-its-still-grey",
+    "title": "How do I…",
+    "section": "Changing the colors but it’s still grey",
+    "text": "Changing the colors but it’s still grey\nIf you are changing the colour of the molecule but it still appears gray, you are likely still in 3D view instead of rendered view."
+  },
+  {
+    "objectID": "quick-reference.html#import-from-the-pdb",
+    "href": "quick-reference.html#import-from-the-pdb",
+    "title": "How do I…",
+    "section": "Import from the PDB",
+    "text": "Import from the PDB\nEnd the PDB ID and download. Options for removing the solvent from the structure on import (any potential water atoms), aligning the structure to the world origin, importing bond information and setting a starting default style."
+  },
+  {
+    "objectID": "quick-reference.html#combine-2-different-styles",
+    "href": "quick-reference.html#combine-2-different-styles",
+    "title": "How do I…",
+    "section": "Combine 2 different Styles",
+    "text": "Combine 2 different Styles\nApply the separate styles in a separate branch of the node tree. Combine the resulting styles with Join Geometry node and use the result of this.\n\n\n\n\n\n\n\n\n\n\nA different selection can be used on each style, with the style only being applied to the given selection for each branch of the node tree."
+  },
+  {
+    "objectID": "quick-reference.html#change-style-based-on-distance",
+    "href": "quick-reference.html#change-style-based-on-distance",
+    "title": "How do I…",
+    "section": "Change Style based on Distance",
+    "text": "Change Style based on Distance\nThe same distance measurements from the Geometry Proximity node can used in a Compare node to apply a distance cutoff. In this example the distance cutoff is 0.8 and the output is a boolean selection. This boolean selection can then be used for the surface style, and the inverse through the Not Boolean Math node is used for the ribbon style."
+  },
+  {
+    "objectID": "quick-reference.html#manually-colour-chains",
+    "href": "quick-reference.html#manually-colour-chains",
+    "title": "How do I…",
+    "section": "Manually Colour Chains",
+    "text": "Manually Colour Chains\nCartoons and ribbons take their colours from the alpha carbon atoms. To colour secondary structure you can just set the colour of the carbon atoms using MOL_color_set_common which is in the starting node tree.\nTo manually set the colours, there is a node that is generated uniquely for each structure based on the chain information. You can access via Add Node using Shift + A, Molecular Nodes -&gt; Color -&gt; Color by Chains\n\n\n\n\n\nIf you wish to set the colour for every atom in the structure based on the chain number, then you instead of the MOL_color_set_common you can use the MOL_color_set node which is accessible via Molecular Nodes -&gt; Color -&gt; Set Color."
+  },
+  {
+    "objectID": "quick-reference.html#color-based-on-b-factor",
+    "href": "quick-reference.html#color-based-on-b-factor",
+    "title": "How do I…",
+    "section": "Color Based on B-factor",
+    "text": "Color Based on B-factor\nYou can access any of the atomic attributes with the Named Attribute node and using the name of the attribute. In this example we set the colour of the structure by first mapping the b_factor attribute from 0..100 to 0..1, then using this value from 0..1 to select a colour using a ColorRamp node. The output of this colour goes into the MOL_color_set node."
+  },
+  {
+    "objectID": "quick-reference.html#color-based-on-distance-to-an-object",
+    "href": "quick-reference.html#color-based-on-distance-to-an-object",
+    "title": "How do I…",
+    "section": "Color Based on Distance to an Object",
+    "text": "Color Based on Distance to an Object\nYou can measure the distance from each atom to a particular object using the Object Info node to get the information from an object (ensure you select Relative instead of Original) and this is used by the Geometry Proximity node. You can then use the Map Range node to convert the min and maximum distance over which to change the colour. The output of the ColorRamp node then sets the colors of the atoms.\n\n\n\n\n\nThe closer atoms to Suzanne are colored green, and the ones that are further away are colored red. As you move around Suzanne, the colors of the atoms are updated."
+  },
+  {
+    "objectID": "introduction.html",
+    "href": "introduction.html",
+    "title": "1. Introduction to Blender",
+    "section": "",
+    "text": "Blender is a complicated program and it is easy to get overwhelmed. We are going to look at it bit by bit, and ultimately only use a fraction of what Blender is capable of."
+  },
+  {
+    "objectID": "introduction.html#workspaces",
+    "href": "introduction.html#workspaces",
+    "title": "1. Introduction to Blender",
+    "section": "Workspaces",
+    "text": "Workspaces\nBlender has a lot of workspaces. It’s a tool that can be used for a nearly unlimited number of tasks. People use it for 2D animated movies, 3D animated movies and TV shows, motion graphics & VFX, creating assets for blockbuster videogames and even for making cool renderings of proteins.\nBecause Blender can be used for so many different purposes, there is a lot of functionality that can be completely overwhelming when you are first starting out. Thankfully for the work that we are wanting to do, we will only need a small subset of what Blender can offer, and so we can limit ourselves to a couple of workspaces.\n\nThe 3D Viewport\n\n\n\nThe starting 3D viewport, which you are greeted with when you start Blender.\n\n\nThis 3D viewport will seem familiar if you have used other programs such as PyMol, ChimeraX & VMD. You can move the camera around just like in those other programs.\nYou can rotate the camera view either using the middle mouse button MMB, or using your touch pad if you are on a laptop. You can also click and drag the axis widget to rotate the camera.\nYou can pan the camera using Shift + MMB\nThe main difference is that you can also manipulate the 3D scene in front of you. You can select objects with a left click of the mouse, and move them around by Grabbing them with the G key.\nThe main actions that you use the 3D Viewport for are:\n\n\nG - Grabbing: Moving an object around in 3D space.\nS - Scaling: Changing the relative size of an object.\nR - Rotating: Rotating the object in 3D space.\n\n\nThe Grid and Axes\nIn the 3D viewport, much like in real life, there are 3 axes of possible movement and direction. Inside of Blender they are X Y and Z. X and Y form the flat grid that you see in the viewport, being coloured TODO red and green respectively, while Z is the blue vertical axis. These are labelled and highlighted on the axis widget, which is present in the top right corner of the viewport. This will rotate as you rotate the view, so it can always be used as a reference point.\n\n\n\nThe axis widget, present in the 3D viewport.\n\n\nWhen applying any of the transformations, you can limit them to a single axis. For example you can move the cube just along the X axis, by press G then x which will move the cube just along the x axis. The same can be applied to any of the transformations of translating, scaling and rotation to any of the axes. You can transfrorm perpendicular to a particular axis by useing G then Shift + x\n\n\nVideo\nExample transformations."
+  },
+  {
+    "objectID": "introduction.html#adding-new-objects",
+    "href": "introduction.html#adding-new-objects",
+    "title": "1. Introduction to Blender",
+    "section": "Adding New Objects",
+    "text": "Adding New Objects\nAdd new objects in the 3D scene by clicking Shift + A, or using the Add menu towards the top of the 3D viewport. You can then select and transform these objects.\n\n\nVideo\nAdding new objects to the 3D scene."
+  },
+  {
+    "objectID": "introduction.html#editing-a-mesh",
+    "href": "introduction.html#editing-a-mesh",
+    "title": "1. Introduction to Blender",
+    "section": "Editing a Mesh",
+    "text": "Editing a Mesh\nYou can switch to Edit Mode with your mouse in the 3D viewport by clicking Tab or by chaning it in the top left corner. While in edit mode, you can see all of the vertices and edges of an object, and you can physically edit these parts of the mesh to create a new 3D mesh.\n\n\nVideo\nExample of editing meshes in edit mode."
+  },
+  {
+    "objectID": "introduction.html#rendering-an-image",
+    "href": "introduction.html#rendering-an-image",
+    "title": "1. Introduction to Blender",
+    "section": "Rendering an Image",
+    "text": "Rendering an Image\nBlender doesn’t render whatever you are currently seeing. Blender will render using the dedicated Camera object that is present inside of the 3D scene.\n\nWhat the Camera Sees\nYou can move this camera around by clicking on it and applying transformations like any other object. To preview what the camera is viewing. you can click on the cmaera widget icon on the top right of the 3D viewport.\nTo render an image you can use the Render tab on the top right, or click F12 as the keyboard shortcut. Only once you click render, will Blender properly calculate all of the requried lighting of the scene and produce a rendered image. You can then save this image as a .png or other image format.\n\n\nVideo\nRendering an image.\n\n\n\n\nMoving the Camera\nMoving and rotating the camera as an object can often be a difficult process. To move the camera around in First Person Mode which most people will be familiar with from playing video games use Shift + ` (below the escape key on US keyboards) and this will control the camera like a first-person video game. Use W / S / A / D to move forward, backward, left and right. Q / E move up and down. Shift increase the movement speed. Moving the mouse cursor changes the direction of the camera. Using the scroll-wheel up and down increases or decreases the movement speed of the camera.\nMoving the camera around in first person. ### Geometry Nodes Editor\nThis is where we edit the node graph for Molecular Nodes. The node graph is a program you create, that is read and executed by Blender from left to right. Each node performs an action on the geometry that is passed into it, and the result of that action is passed out to the right.\n\nThink of it as creating a set of rules for the computer to follow. You define the rules, and the computer can follow those same rules, even if you start with a different data set.\n\nCombining multiple different nodes you can create protein models and complex 3D scenes.\n\n\n\n\n\n\n\nShader Editor\nThis is where you can change the colour of something. Coming from a program like PyMol and ChimeraX, you might be used to the idea of just changing the colour of something. “I want my protein to be red.”, and then just making that change with a colour picker.\nWhen dealing with 3D scenes, it’s not quite as simple as that anymore. Blender is a 3D rendering program, which means it takes into account not just the colour or something, but other physical properties of an object when calculating how it looks. You can change how metallic a surface is, along with how rough it is and a lot of other complex components in 3D graphics. Try not to worry too much about what you are playing around with, just move the sliders one way and the other to try and find a look that you like. You will however be able to change the colour of something by changing the primary RGB selector."
+  },
+  {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "Installation",
+    "section": "",
+    "text": "Download the latest bundled release from the releases page. Don’t download the GitHub repo itself, as this won’t install inside of Blender.\n\n\n\n\n\n\nSafari\n\n\n\nWhen downloading on MacOS with Safari, it automatically unzips the file into a MolecularNodes folder. This is extremely unhelpful as Blender requires the .zip file to install the addon. Either download with a different browser, or compress the folder again to MolecularNodes.zip."
+  },
+  {
+    "objectID": "installation.html#downloading-molecularnodes",
+    "href": "installation.html#downloading-molecularnodes",
+    "title": "Installation",
+    "section": "",
+    "text": "Download the latest bundled release from the releases page. Don’t download the GitHub repo itself, as this won’t install inside of Blender.\n\n\n\n\n\n\nSafari\n\n\n\nWhen downloading on MacOS with Safari, it automatically unzips the file into a MolecularNodes folder. This is extremely unhelpful as Blender requires the .zip file to install the addon. Either download with a different browser, or compress the folder again to MolecularNodes.zip."
+  },
+  {
+    "objectID": "installation.html#installing-the-addon",
+    "href": "installation.html#installing-the-addon",
+    "title": "Installation",
+    "section": "Installing the Addon",
+    "text": "Installing the Addon\n\n\n\n\n\n\nWindows Administrator\n\n\n\nIf you are on Windows, you may need to run Blender as Administrator to successfully complete the following installation.\n\n\n\nOpen Preferences Panel\n\nClick `Edit’ -&gt; ‘Preferences’ or press Cmd +  , on Mac.\n\n\n\n\n\n\n\n\nClick ‘Install’ while in ‘Add-ons’\n\n\n\n\n\n\n\nSelect MolecularNodes_X.zip\n\nThe X’s will be the current version number of the add-on."
+  },
+  {
+    "objectID": "installation.html#installing-biotite-mdanalysis",
+    "href": "installation.html#installing-biotite-mdanalysis",
+    "title": "Installation",
+    "section": "Installing Biotite & MDAnalysis",
+    "text": "Installing Biotite & MDAnalysis\nTo import different data formats, different python packages are required to be installed. Each python package is responsible for importing a different data format.\n\nBiotite: handles the majority of .pdb / .cif file parsing and downloading from the wwPDB.\nMDAnalysis: enables import of molecular dynamics trajectories from programs such as GROMACS / LAMMPS.\nmrcfile: enables import of electron microscopy densities and EM tomography .map files.\n\nEach of these packages should be fine to be installed by a single click. Blender will freeze for potentially a minute or so during installation. Currently M1 / M2 macs require more complex installation to install MDAnalysis, please see the instructions below. Downloading from the wwPDB and opening local .pdb files with Biotite should work fine without MDAnalysis installed.\n\n\n\n\n\n\nMacOS M1 & M2\n\n\n\n\n\nBlender’s bundled python is unable to install python packages that require compilation on the user’s machine. Currently, MDAnalysis is missing a pre-compiled .whl to install, and thus installation will fail on M1 & M2 machines. You can download and pre-compile these packages on your machine yourself, following the below instructions.\nThis is the current fix for M1 / M2 machines, but will be fixed in future releases.\nIn short:\n\nInstall miniconda\nDownload and build the required packages for your system\n\nmkdir ~/MDAnalysis-wheel\ncd MDAnalysis-wheel\nconda create -n wheel-builder python=3.10 cython\nconda activate wheel-builder\npython -m pip wheel MDAnalysis==2.5.0 --cache-dir .\nconda deactivate\n\nInstall the built .whl packages, into Blender’s bundled python. The path to your\n\nNavigate to your Blender’s python folder (this is the default path for Blender 3.5)\ncd /Applications/Blender.app/Contents/Resources/3.5/python/bin/\nInstall the cached .whl into the bundled python that came with Blender.\n./python3.10 -m pip install MDAnalysis --cache-dir ~/MDAnalysis-wheel\nThe Install MDAnalysis button should now successfully install the remaining packages.\n\n\n\n\n\n\n\n\nA message should report the successful installation of each package, with the button changing to Reinstall biotite once MolecularNodes detects the successful installation of the package.\nYou may need to restart Blender after package installation for them to work properly.\nIf you have troubled with installation, search through the issues page for a potential solution. If you can’t find the solution there, please open a new issue on the GitHub page. Please don’t just DM or email me directly. It’s better to do problem solving out in the open, as others might have the same issue or someone other than me may already have a solution!"
+  },
+  {
+    "objectID": "online-tutorials.html",
+    "href": "online-tutorials.html",
+    "title": "Online Tutorials",
+    "section": "",
+    "text": "If you want to get a head start before the workshop, you can watch some of the online tutorials which I have already published on youtube. I cover a general introduction to Blender, Geometry Nodes and Molecular Nodes. These tutorials are aimed at other biochemists who are familiar with protein structures, but not with 3D modelling or 3D programs such as Blender."
+  },
+  {
+    "objectID": "online-tutorials.html#blender-for-biochemists",
+    "href": "online-tutorials.html#blender-for-biochemists",
+    "title": "Online Tutorials",
+    "section": "Blender for Biochemists",
+    "text": "Blender for Biochemists\nBelow are the videos on a general introduction to Blender for Biochemists and others alike, focusing on how to export proteins from PyMol and ChimeraX and import it into Blender."
+  },
+  {
+    "objectID": "online-tutorials.html#molecular-nodes",
+    "href": "online-tutorials.html#molecular-nodes",
+    "title": "Online Tutorials",
+    "section": "Molecular Nodes",
+    "text": "Molecular Nodes\nTutorials focusing on how to use the current iteration of Molecular Nodes, from importing from the PDB and doing some basics of styling and rendering the proteins."
+  }
+]
